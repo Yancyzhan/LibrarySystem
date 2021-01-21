@@ -1,0 +1,278 @@
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+
+public class Search {
+
+	private JFrame frmSearch;
+	private JList<String> list;
+	private Vector<Document> docs;
+	private DefaultListModel<String> lister;
+	private DefaultListModel<String> orderLister;
+	private String docName;
+	private Buyer regBuy;
+	private Management man;
+	private Order order;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Search window = new Search();
+//					window.frmSearch.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public Search(Vector<Document> docs,Buyer regBuy,Management man,Order order) {
+		this.regBuy = regBuy;
+		this.docs = docs;
+		this.man = man;
+		this.order = order;
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmSearch = new JFrame();
+		frmSearch.setTitle("Search");
+		frmSearch.setBounds(100, 100, 766, 408);
+		frmSearch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmSearch.getContentPane().setLayout(null);
+		
+		lister = new DefaultListModel();
+		orderLister = new DefaultListModel();
+		list = new JList<>(lister);
+		list.setBounds(0, 25, 277, 259);
+		list.setFont(new Font("Serif", Font.BOLD, 13));
+		list.setForeground(Color.WHITE);
+		list.setBackground(Color.DARK_GRAY);
+		list.addListSelectionListener(new DocListen());
+		frmSearch.getContentPane().add(list);
+		display();
+		
+		JList orderList = new JList();
+		orderList.setBackground(Color.DARK_GRAY);
+		orderList.setBounds(489, 25, 230, 259);
+		
+		orderList = new JList<>(orderLister);
+		frmSearch.getContentPane().add(orderList);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBackground(Color.WHITE);
+		scrollBar.setForeground(Color.WHITE);
+		scrollBar.setBounds(248, 25, 17, 259);
+		frmSearch.getContentPane().add(scrollBar);
+		
+		JLabel title = DefaultComponentFactory.getInstance().createLabel("Document List");
+		title.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+		title.setBackground(Color.LIGHT_GRAY);
+		title.setForeground(Color.BLACK);
+		title.setBounds(0, 0, 130, 25);
+		frmSearch.getContentPane().add(title);
+		
+		JTextArea details = new JTextArea();
+		details.setFont(new Font("Serif", Font.BOLD, 13));
+		details.setForeground(Color.WHITE);
+		details.setBackground(Color.DARK_GRAY);
+		details.setBounds(287, 25, 192, 259);
+		frmSearch.getContentPane().add(details);
+		
+		JLabel det = DefaultComponentFactory.getInstance().createLabel("Details");
+		det.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+		det.setForeground(Color.BLACK);
+		det.setBounds(287, 7, 92, 14);
+		frmSearch.getContentPane().add(det);
+		
+		JButton dets = new JButton("Details");
+		dets.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(int i = 0; i < docs.size();i++){
+					Document doc = docs.get(i);
+					if(doc.getName().equals(docName)){
+						if(doc instanceof Book){
+							
+							details.setText("Title: " + ((Book)doc).getName()+ "\n");
+							details.append("Author Name: " + ((Book)doc).getAutName() + "\n");
+							details.append("Publish Date: " + ((Book)doc).getDate() + "\n");
+							details.append("ISBN: " + ((Book)doc).getIsbn() +"\n");
+							details.append("Publisher: " + ((Book)doc).getPublisherName() +"\n");
+							details.append("Price: " + ((Book)doc).getPrice() +"\n");
+						}
+						else if(doc instanceof Journal){
+							
+							details.setText("Title: " + ((Journal)doc).getName()+ "\n");
+							details.append("Author Name: " + ((Journal)doc).getAutName() + "\n");
+							details.append("Publish Date: " + ((Journal)doc).getDate() + "\n");
+							details.append("ID: " + ((Journal)doc).getJournalId() +"\n");
+							details.append("Publisher: " + ((Journal)doc).getPublisher() +"\n");
+							details.append("Start Date: " + ((Journal)doc).getStartDate() +"\n");
+							details.append("Price: " + ((Journal)doc).getPrice() +"\n");
+						}
+						
+						else{
+							details.setText("Title: " + ((Magazine)doc).getName()+ "\n");
+							details.append("Author Name: " + ((Magazine)doc).getAutName() + "\n");
+							details.append("Publish Date: " + ((Magazine)doc).getDate() + "\n");
+							details.append("ID: " + ((Magazine)doc).getMagId() +"\n");
+							details.append("Company: " + ((Magazine)doc).getCompany() +"\n");
+							details.append("Price: " + ((Magazine)doc).getPrice() +"\n");
+						}
+					}
+				}
+			}
+		});
+		dets.setBounds(135, 311, 89, 23);
+		frmSearch.getContentPane().add(dets);
+		
+		JButton ret = new JButton("Return");
+		ret.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmSearch.dispose();
+				if(regBuy instanceof RegisteredBuyer){
+				Member me = new Member(docs,(RegisteredBuyer)regBuy,man);
+				}
+				else {
+					Visitor vi = new Visitor(docs,man,(OrdinaryBuyer)regBuy);
+				}
+			}
+		});
+		ret.setBounds(481, 311, 89, 23);
+		frmSearch.getContentPane().add(ret);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(10, 27, 239, 257);
+		frmSearch.getContentPane().add(textArea);
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = JOptionPane.showInputDialog("What is the document's name?");
+				for(int i = 0; i < docs.size(); i++) {
+					Document doc = docs.get(i);
+					if(doc.getName().equals(name)){
+						if(doc instanceof Book){
+							
+							details.setText("Title: " + ((Book)doc).getName()+ "\n");
+							details.append("Author Name: " + ((Book)doc).getAutName() + "\n");
+							details.append("Publish Date: " + ((Book)doc).getDate() + "\n");
+							details.append("ISBN: " + ((Book)doc).getIsbn() +"\n");
+							details.append("Publisher: " + ((Book)doc).getPublisherName() +"\n");
+							details.append("Price: " + ((Book)doc).getPrice() +"\n");
+						}
+						else if(doc instanceof Journal ){
+							
+							details.setText("Title: " + ((Journal)doc).getName()+ "\n");
+							details.append("Author Name: " + ((Journal)doc).getAutName() + "\n");
+							details.append("Publish Date: " + ((Journal)doc).getDate() + "\n");
+							details.append("ID: " + ((Journal)doc).getJournalId() +"\n");
+							details.append("Publisher: " + ((Journal)doc).getPublisher() +"\n");
+							details.append("Start Date: " + ((Journal)doc).getStartDate() +"\n");
+							details.append("Price: " + ((Journal)doc).getPrice() +"\n");
+						}
+						
+						else{
+							details.setText("Title: " + ((Magazine)doc).getName()+ "\n");
+							details.append("Author Name: " + ((Magazine)doc).getAutName() + "\n");
+							details.append("Publish Date: " + ((Magazine)doc).getDate() + "\n");
+							details.append("ID: " + ((Magazine)doc).getMagId() +"\n");
+							details.append("Company: " + ((Magazine)doc).getCompany() +"\n");
+							details.append("Price: " + ((Magazine)doc).getPrice() +"\n");
+						}
+					}
+				}
+				}
+			
+		});
+		btnSearch.setBounds(10, 311, 93, 23);
+		frmSearch.getContentPane().add(btnSearch);
+		
+		JButton btnAddToShopping = new JButton("Add to Cart");
+		btnAddToShopping.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				for(int i = 0; i < docs.size();i++){
+					if(docs.get(i).getName().equals(docName)){
+						order.add(docs.get(i));
+					}
+				}
+			}
+		});
+		btnAddToShopping.setBounds(248, 311, 113, 23);
+		frmSearch.getContentPane().add(btnAddToShopping);
+		
+		JButton remove = new JButton("Remove");
+		remove.setBounds(382, 311, 89, 23);
+		frmSearch.getContentPane().add(remove);
+		
+		
+		JLabel cart = DefaultComponentFactory.getInstance().createLabel("My Cart");
+		cart.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+		cart.setForeground(Color.BLACK);
+		cart.setBounds(496, 2, 92, 21);
+		frmSearch.getContentPane().add(cart);
+		frmSearch.setVisible(true);
+	}
+
+	private void display() {
+		lister.removeAllElements();
+		for(int i = 0; i < docs.size();i++){
+			lister.addElement(docs.get(i).getName());
+		}
+		
+	}
+	
+	private void displayOrder(){
+		orderLister.removeAllElements();
+		for(int i = 0; i < order.getDocs().size();i++){
+			orderLister.addElement(order.getDocs().get(i).getName());
+		}
+	}
+	
+	class DocListen implements ListSelectionListener{
+
+		public void valueChanged(ListSelectionEvent arg0) {
+			// TODO Auto-generated method stub
+
+			docName = list.getSelectedValue();
+		}
+
+	}
+	
+	class OrderListen implements ListSelectionListener{
+
+		public void valueChanged(ListSelectionEvent arg0) {
+			// TODO Auto-generated method stub
+
+			docName = list.getSelectedValue();
+		}
+
+	}
+}

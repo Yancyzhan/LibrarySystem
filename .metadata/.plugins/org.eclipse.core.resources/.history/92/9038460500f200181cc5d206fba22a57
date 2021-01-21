@@ -1,0 +1,30 @@
+import java.util.Vector;
+
+public class Payment{
+	private Order order;
+	int cardNo;
+	String cardType;
+	
+	Payment(Order order, int card, String type){
+		this.order = order;
+		cardNo = card;
+		cardType = type;
+	}
+
+	public int getCardNo() {
+		return cardNo;
+	}
+
+	public void setCardNo(int cardNo) {
+		this.cardNo = cardNo;
+	}
+
+	public String getCardType() {
+		return cardType;
+	}
+
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
+	
+}

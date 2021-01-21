@@ -1,0 +1,14 @@
+import java.util.Vector;
+
+public class Payment implements MakePayment{
+	Vector<Document> docs;
+	int cardNo;
+	String cardType;
+	
+	@Override
+	public void pay() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

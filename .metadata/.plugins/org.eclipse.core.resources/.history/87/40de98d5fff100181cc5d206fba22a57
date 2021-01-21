@@ -1,0 +1,12 @@
+import java.util.Vector;
+
+public class Payment{
+	private Order order;
+	int cardNo;
+	String cardType;
+	
+	Payment(){
+		
+	}
+	
+}

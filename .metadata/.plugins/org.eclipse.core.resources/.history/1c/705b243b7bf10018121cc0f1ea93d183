@@ -1,0 +1,58 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Start {
+
+	private JFrame frmWelcomeToPms;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Start window = new Start();
+					window.frmWelcomeToPms.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Start() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmWelcomeToPms = new JFrame();
+		frmWelcomeToPms.getContentPane().setBackground(Color.DARK_GRAY);
+		frmWelcomeToPms.setTitle("WELCOME TO PMS");
+		frmWelcomeToPms.setBounds(100, 100, 450, 300);
+		frmWelcomeToPms.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmWelcomeToPms.getContentPane().setLayout(null);
+		
+		JButton start = new JButton("Start");
+		start.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmWelcomeToPms.dispose();
+				Management man = new Management();
+			}
+		});
+		start.setBounds(174, 111, 89, 23);
+		frmWelcomeToPms.getContentPane().add(start);
+	}
+
+}

@@ -1,0 +1,52 @@
+import java.awt.EventQueue;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+public class UpdateBook {
+
+	private JFrame frmUpdate;
+	private Vector<Document>docs;
+	private String title;
+	private JTextField bkName;
+	private JTextField aName;
+	private JTextField isbnNum;
+	private JTextField publisher;
+	private JTextField date;
+	private JTextField docPrice;
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					UpdateBook window = new UpdateBook();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public UpdateBook() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmUpdate = new JFrame();
+		frmUpdate.setTitle("Update");
+		frmUpdate.setBounds(100, 100, 450, 300);
+		frmUpdate.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmUpdate.getContentPane().setLayout(null);
+	}
+
+}

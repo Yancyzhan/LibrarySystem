@@ -1,0 +1,31 @@
+import java.util.Vector;
+
+public class Order {
+	private int orderID;
+	private Vector<Document> cart;
+	private Payment payment;
+	
+	public int getOrderID() {
+		return orderID;
+	}
+	
+	public void setOrderID(int orderID) {
+		this.orderID = orderID;
+	}
+	
+	public Vector<Document> getCart() {
+		return cart;
+	}
+	
+	public void setCart(Vector<Document> cart) {
+		this.cart = cart;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+}

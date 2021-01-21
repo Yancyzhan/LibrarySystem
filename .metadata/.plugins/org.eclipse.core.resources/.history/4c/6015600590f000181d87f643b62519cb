@@ -1,0 +1,19 @@
+
+public class Buyer implements Observer{
+	String name;
+	Order order;
+	Subject subject;
+	
+	public Buyer(Subject s) {
+		subject = s;
+		subject.register(this);
+	}
+	public Document search(Document doc) {
+		return doc;
+	}
+	
+	public void placeorder(Order order) {
+		
+	}
+
+}

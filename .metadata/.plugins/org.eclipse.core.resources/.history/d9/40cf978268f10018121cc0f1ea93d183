@@ -1,0 +1,7 @@
+
+public interface MaintainDocs {
+ public void add(Document doc);
+ public void remove();
+ public void update(Document doc);
+ 
+}

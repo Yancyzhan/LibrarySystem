@@ -1,0 +1,12 @@
+
+public class Book extends Document{
+	private int isbn;
+	private String publisherName;
+	
+	public Book(String name, String autName, String date,String type,int num,String pubName){
+		super(name, autName,date,type);
+		isbn = num;
+		publisherName = pubName;
+	}
+	
+}

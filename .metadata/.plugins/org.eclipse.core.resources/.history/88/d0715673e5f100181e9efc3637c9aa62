@@ -1,0 +1,62 @@
+import java.awt.EventQueue;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+public class UpdateMagazine {
+
+	private JFrame frame;
+	private Vector<Document> docs;
+	private Magazine doc;
+	private String title;
+	private JTextField mName;
+	private JTextField aName;
+	private JTextField magId;
+	private JTextField company;
+	private JTextField date;
+	private JTextField priceDoc;
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					UpdateMagazine window = new UpdateMagazine();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public UpdateMagazine(Vector<Document>docs, String name) {
+		this.docs = (Vector)docs.clone();
+		title = name;
+		doc = (Magazine)getDoc(title);
+		initialize();
+	}
+	public Document getDoc(String n){
+		for(int i = 0; i < docs.size();i++){
+			if(docs.get(i).getName().equals(title)){
+				return docs.get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+}

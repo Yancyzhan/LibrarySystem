@@ -1,0 +1,135 @@
+import java.awt.EventQueue;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.ScrollPane;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Operator implements MaintainDocs {
+
+	private JFrame frmOperator;
+	private String name;
+	private Vector<Document> docs;
+	private DefaultListModel<String> lister;
+	private JList<String> list;
+	private JScrollPane jp;
+	private String docName;
+	
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Operator window = new Operator();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public Operator(Vector<Document> docs) {
+		this.docs = docs;
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmOperator = new JFrame();
+		frmOperator.setTitle("Operator");
+		frmOperator.setBounds(100, 100, 450, 300);
+		frmOperator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmOperator.getContentPane().setLayout(null);
+		lister = new DefaultListModel();
+		list = new JList<>(lister);
+		//jp = new JScrollPane(list);
+		list.setBounds(0, 0, 228, 262);
+		list.setFont(new Font("Serif", Font.PLAIN, 13));
+		list.setForeground(Color.WHITE);
+		list.setBackground(Color.DARK_GRAY);
+		list.addListSelectionListener(new DocListener());
+		frmOperator.getContentPane().add(jp);
+		
+		JButton add = new JButton("Add");
+		add.setBounds(283, 52, 89, 23);
+		add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String type = JOptionPane.showInputDialog("What is the document type?(Book, Journal, Magazine)");
+				if(type.equals("Book")){
+					frmOperator.dispose();
+					AddBook ab = new AddBook(docs);
+				}
+				else if(type.equals("Journal")){
+					frmOperator.dispose();
+					AddJournal aj = new AddJournal(docs);
+				}
+				else if(type.equals("Magazine")){
+					frmOperator.dispose();
+					AddMagazine am = new AddMagazine(docs);
+				}
+				else
+				{
+				JOptionPane.showMessageDialog(null, "Invalid input, please follow the instruction");	
+				}
+			}
+		});
+		frmOperator.getContentPane().add(add);
+		
+		JButton remove = new JButton("Remove");
+		remove.setBounds(283, 86, 89, 23);
+		frmOperator.getContentPane().add(remove);
+		
+		JButton update = new JButton("Update");
+		update.setBounds(283, 120, 89, 23);
+		frmOperator.getContentPane().add(update);
+		frmOperator.setVisible(true);
+	}
+
+//	@Override
+//	public void add(Document doc) {
+//		// TODO Auto-generated method stub
+//		docs.add(doc);
+//		
+//	}
+
+	@Override
+	public void remove(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Document doc) {
+		// TODO Auto-generated method stub
+		
+	}
+	class DocListener implements ListSelectionListener{
+
+		public void valueChanged(ListSelectionEvent arg0) {
+			// TODO Auto-generated method stub
+
+			docName = list.getSelectedValue();
+		}
+
+	}
+}

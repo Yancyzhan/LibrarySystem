@@ -1,0 +1,26 @@
+import java.util.Vector;
+import java.util.Random;
+public class Order {
+	private int orderId;
+	private Vector<Document> cart;
+	//private Payment payment;
+	
+	public Order(){
+		OrderId = 
+
+Random rand = new Random();
+
+int n = rand.nextInt(50) + 1;
+	}
+	
+	public void makePayment(){
+		
+	}
+	public void add(Document doc){
+		
+	}
+	
+	public void remove(Document doc){
+		
+	}
+}

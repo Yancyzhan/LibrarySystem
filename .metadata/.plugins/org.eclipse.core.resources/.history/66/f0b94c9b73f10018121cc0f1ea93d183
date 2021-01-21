@@ -1,0 +1,46 @@
+import java.awt.EventQueue;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+
+public class AddMagazine {
+
+	private JFrame frmAddMagazine;
+	private Vector<Document> docs;
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AddMagazine window = new AddMagazine();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public AddMagazine(Vector<Document> docs) {
+		this.docs = docs;
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmAddMagazine = new JFrame();
+		frmAddMagazine.setTitle("Add Magazine");
+		frmAddMagazine.setBounds(100, 100, 450, 300);
+		frmAddMagazine.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAddMagazine.getContentPane().setLayout(null);
+		frmAddMagazine.setVisible(true);
+	}
+
+}

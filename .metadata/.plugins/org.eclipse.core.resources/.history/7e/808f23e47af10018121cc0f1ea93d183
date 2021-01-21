@@ -1,0 +1,158 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.Vector;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Management implements Subject  {
+	private Subject subject;
+	private JFrame frmPms;
+	private Vector<Document> documents;
+	//since database and login are not requirements we are using 3 members to begin with, in an actual program it will be automatic and the number will depend on the database
+	private Vector<RegisteredBuyer> buyers;
+	private Management man = null;
+	//private Vector<Observer> observers;
+
+	/**	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		Management management = new Management();
+//		management.frmPms.setVisible(true);
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public Management() {
+		man = this;
+		buyers = new Vector<RegisteredBuyer>();
+		documents = new Vector<Document>(3,2);
+		populateBuyers();
+		populateDocs();
+		
+		initialize();
+	}
+	public void setDoc(Vector<Document> docs){
+		documents = docs;
+	}
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	public void initialize() {
+		frmPms = new JFrame();
+		frmPms.getContentPane().setBackground(Color.DARK_GRAY);
+		frmPms.setTitle("PMS");
+		frmPms.setBounds(100, 100, 450, 300);
+		frmPms.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPms.getContentPane().setLayout(null);
+		frmPms.setVisible(true);
+		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("USE THE SYSTEM AS...");
+		lblNewJgoodiesTitle.setForeground(Color.WHITE);
+		lblNewJgoodiesTitle.setToolTipText("");
+		lblNewJgoodiesTitle.setFont(new Font("Gungsuh", Font.BOLD | Font.ITALIC, 16));
+		lblNewJgoodiesTitle.setBackground(Color.WHITE);
+		lblNewJgoodiesTitle.setBounds(131, 22, 253, 14);
+		frmPms.getContentPane().add(lblNewJgoodiesTitle);
+		
+		JButton operator = new JButton("Operator");
+		operator.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmPms.dispose();
+				Operator op = new Operator(man,documents);
+				
+			}
+		});
+		operator.setBounds(184, 68, 89, 23);
+		frmPms.getContentPane().add(operator);
+		
+		JButton member = new JButton("Member");
+		member.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent a) {
+				String name = JOptionPane.showInputDialog("Enter your name");
+				//RegisteredBuyer buyer = new RegisteredBuyer(subject,name);
+				boolean found = false;
+				for(int i = 0; i < buyers.size();i++){
+					if(buyers.get(i).getName().equals(name)){
+				found = true;		
+				frmPms.dispose();
+				Member me = new Member(documents,buyers.get(i));
+					}
+					
+			}
+				if(found == false){
+					JOptionPane.showMessageDialog(null, "Please try again");
+				}
+				
+			}
+		});
+		member.setBounds(184, 102, 89, 23);
+		frmPms.getContentPane().add(member);
+		
+		JButton visitor = new JButton("Visitor");
+		visitor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent b) {
+				frmPms.dispose();
+				Visitor vi = new Visitor(documents);
+			}
+		});
+		visitor.setBounds(184, 138, 89, 23);
+		frmPms.getContentPane().add(visitor);
+	}
+
+	@Override
+	public void register(Buyer o) {
+		// TODO Auto-generated method stub
+		buyers.add((RegisteredBuyer) o);
+	}
+
+	@Override
+	public void notifyAllBuyers() {
+		// TODO Auto-generated method stub
+		for(int i = 0; i < buyers.size(); i++){
+			Observer o = buyers.get(i);
+			o.update(documents);
+		}
+	}
+
+	@Override
+	public void remove(Observer o) {
+		// TODO Auto-generated method stub
+		buyers.remove(o);
+	}
+
+	/*
+	 * since we are not using database and login, at the beginning we will populate the buyers vector with few members;
+	 */
+	private void populateBuyers(){
+	 for(int i = 0; i < 3; i++){
+		 RegisteredBuyer b = new RegisteredBuyer(subject,("name" + Integer.toString(i)));
+		 buyers.add(b);
+	 }
+	}
+	
+	private void populateDocs(){
+		
+		for(int i = 0; i < 3; i++){
+			Document doc;
+			if(i == 1){
+			 doc = new Book("aaa","k1","20 September, 2018",1221,"BookCompany");
+			}
+			else if(i == 2){
+				doc = new Journal("bbb","k2","20 September, 2018",12,"Newspaper","12 January, 1998");
+			}
+			else {
+				doc = new Magazine("bbb","k2","20 September, 2018",12,"Newspaper");
+			}
+			
+			documents.add(doc);
+		}
+	}
+}

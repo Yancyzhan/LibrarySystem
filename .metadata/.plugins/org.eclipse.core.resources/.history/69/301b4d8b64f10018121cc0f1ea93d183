@@ -1,0 +1,75 @@
+import java.awt.EventQueue;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+
+public class AddBook {
+
+	private JFrame frmAddBook;
+	private Vector<Document> docs;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AddBook window = new AddBook();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public AddBook(Vector<Document> docs) {
+		this.docs = docs;
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmAddBook = new JFrame();
+		frmAddBook.getContentPane().setBackground(Color.DARK_GRAY);
+		frmAddBook.setTitle("Add Book");
+		frmAddBook.setBounds(100, 100, 538, 370);
+		frmAddBook.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAddBook.getContentPane().setLayout(null);
+		
+		JLabel bName = new JLabel("Book Name");
+		bName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		bName.setForeground(Color.WHITE);
+		bName.setBounds(45, 42, 94, 14);
+		frmAddBook.getContentPane().add(bName);
+		
+		JLabel autName = new JLabel("Author Name");
+		autName.setForeground(Color.WHITE);
+		autName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		autName.setBounds(45, 79, 115, 14);
+		frmAddBook.getContentPane().add(autName);
+		
+		JLabel isbn = new JLabel("ISBN");
+		isbn.setFont(new Font("Tahoma", Font.BOLD, 14));
+		isbn.setForeground(Color.WHITE);
+		isbn.setBounds(47, 112, 46, 14);
+		frmAddBook.getContentPane().add(isbn);
+		
+		JLabel pubName = new JLabel("Publisher Name");
+		pubName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		pubName.setForeground(Color.WHITE);
+		pubName.setBounds(45, 143, 115, 14);
+		frmAddBook.getContentPane().add(pubName);
+		frmAddBook.setVisible(true);
+	}
+
+}

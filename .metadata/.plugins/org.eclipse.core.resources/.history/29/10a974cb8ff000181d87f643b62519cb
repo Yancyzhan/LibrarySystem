@@ -1,0 +1,15 @@
+
+public class Buyer {
+	String name;
+	Order order;
+	Subject subject;
+	
+	public Document search(Document doc) {
+		return doc;
+	}
+	
+	public void placeorder(Order order) {
+		
+	}
+
+}

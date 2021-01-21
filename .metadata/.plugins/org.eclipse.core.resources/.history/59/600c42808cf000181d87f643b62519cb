@@ -1,0 +1,6 @@
+
+public class Document {
+	private String name;
+	private String authorName;
+	private String publishDate;
+}

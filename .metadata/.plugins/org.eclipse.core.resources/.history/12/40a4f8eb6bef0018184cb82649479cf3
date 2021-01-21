@@ -1,0 +1,63 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class SystemAdmin {
+
+	private JFrame frmPms;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					SystemAdmin window = new SystemAdmin();
+					window.frmPms.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public SystemAdmin() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmPms = new JFrame();
+		frmPms.setTitle("PMS");
+		frmPms.setBounds(100, 100, 450, 300);
+		frmPms.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPms.getContentPane().setLayout(null);
+		
+		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("USE THE SYSTEM AS....");
+		lblNewJgoodiesTitle.setBounds(155, 22, 123, 14);
+		frmPms.getContentPane().add(lblNewJgoodiesTitle);
+		
+		JButton operator = new JButton("Operator");
+		operator.setBounds(165, 81, 89, 23);
+		frmPms.getContentPane().add(operator);
+		
+		JButton member = new JButton("Member");
+		member.setBounds(165, 118, 89, 23);
+		frmPms.getContentPane().add(member);
+		
+		JButton visitor = new JButton("Visitor");
+		visitor.setBounds(165, 152, 89, 23);
+		frmPms.getContentPane().add(visitor);
+	}
+}

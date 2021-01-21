@@ -1,0 +1,65 @@
+import java.awt.EventQueue;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+
+public class Operator implements MaintainDocs {
+
+	private JFrame frame;
+	private String name;
+	private Vector<Document> docs;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Operator window = new Operator();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public Operator(Vector<Document> docs) {
+		this.docs = docs;
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+	@Override
+	public void add(Document doc) {
+		// TODO Auto-generated method stub
+		docs.add(doc);
+		
+	}
+
+	@Override
+	public void remove(Document doc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Document doc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

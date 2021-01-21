@@ -1,0 +1,25 @@
+import java.util.Vector;
+
+public class Document implements Subject {
+	String name;
+	String authorName;
+	String publishDate;
+	Vector<Observer> obersvers;
+
+	
+	@Override
+	public void register(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void remove(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void notifiyAllBuyers() {
+		// TODO Auto-generated method stub
+		
+	}
+}

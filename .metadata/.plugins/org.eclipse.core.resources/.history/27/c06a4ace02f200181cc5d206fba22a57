@@ -1,0 +1,110 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class PaymentReview {
+
+	private JFrame frmInvoice;
+	private Payment pay;
+	private JTextField type;
+	private JTextField cardno;
+	private JTextField total;
+
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					PaymentReview window = new PaymentReview();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public PaymentReview(Payment pay) {
+		this.pay = pay;
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmInvoice = new JFrame();
+		frmInvoice.getContentPane().setBackground(Color.DARK_GRAY);
+		frmInvoice.setTitle("Invoice");
+		frmInvoice.setBounds(100, 100, 450, 300);
+		frmInvoice.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmInvoice.getContentPane().setLayout(null);
+		frmInvoice.setVisible(true);
+		JLabel ct = new JLabel("Card Type");
+		ct.setFont(new Font("Tahoma", Font.BOLD, 12));
+		ct.setForeground(Color.WHITE);
+		ct.setBounds(45, 37, 85, 14);
+		frmInvoice.getContentPane().add(ct);
+		
+		type = new JTextField();
+		type.setBounds(172, 35, 140, 20);
+		frmInvoice.getContentPane().add(type);
+		type.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Card No.");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(45, 75, 85, 14);
+		frmInvoice.getContentPane().add(lblNewLabel);
+		
+		cardno = new JTextField();
+		cardno.setBounds(172, 73, 140, 20);
+		frmInvoice.getContentPane().add(cardno);
+		cardno.setColumns(10);
+		cardno.setText(Integer.toString(pay.getCardNo());
+		JLabel Pay = new JLabel("Total Payment");
+		Pay.setFont(new Font("Tahoma", Font.BOLD, 13));
+		Pay.setForeground(Color.WHITE);
+		Pay.setBounds(45, 117, 103, 14);
+		frmInvoice.getContentPane().add(Pay);
+		
+		total = new JTextField();
+		total.setBounds(172, 115, 140, 20);
+		frmInvoice.getContentPane().add(total);
+		total.setColumns(10);
+		
+		JButton payM = new JButton("Pay");
+		payM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Payment Successful");
+			}
+		});
+		payM.setBounds(227, 168, 89, 23);
+		frmInvoice.getContentPane().add(payM);
+		
+		JButton cance = new JButton("Cancel");
+		cance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "You will now be redirected to the start page");
+				frmInvoice.dispose();
+				Start st = new Start();
+			}
+		});
+		cance.setBounds(127, 168, 89, 23);
+		frmInvoice.getContentPane().add(cance);
+	}
+}

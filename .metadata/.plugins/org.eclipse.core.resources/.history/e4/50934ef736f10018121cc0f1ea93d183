@@ -1,0 +1,13 @@
+
+public class RegisteredBuyer extends Buyer {
+	private String name;
+	public RegisteredBuyer(Subject sub,String name){
+		
+		super(sub);
+		this.name = name;
+	}
+	
+	public void unsubscribe(){
+		subject.remove(this);
+	}
+}

@@ -1,0 +1,18 @@
+
+public class Book {
+	private int ISBN;
+	private String publisherName;
+	
+	public int getISBN() {
+		return ISBN;
+	}
+	public void setISBN(int iSBN) {
+		ISBN = iSBN;
+	}
+	public String getPublisherName() {
+		return publisherName;
+	}
+	public void setPublisherName(String publisherName) {
+		this.publisherName = publisherName;
+	}
+}

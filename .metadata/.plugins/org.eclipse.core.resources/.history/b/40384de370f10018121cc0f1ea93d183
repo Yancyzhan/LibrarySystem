@@ -1,0 +1,140 @@
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+public class AddJournal {
+
+	private JFrame frame;
+	private Vector<Document> docs;
+	private JTextField bkName;
+	private JTextField aName;
+	private JTextField jId;
+	private JTextField publisher;
+	private JTextField date;
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AddJournal window = new AddJournal();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public AddJournal(Vector<Document> docs) {
+		this.docs = docs;
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		
+		JLabel bName = new JLabel("Book Name");
+		bName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		bName.setForeground(Color.WHITE);
+		bName.setBounds(45, 42, 94, 14);
+		frame.getContentPane().add(bName);
+		
+		JLabel autName = new JLabel("Author Name");
+		autName.setForeground(Color.WHITE);
+		autName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		autName.setBounds(45, 79, 115, 14);
+		frame.getContentPane().add(autName);
+		
+		JLabel isbn = new JLabel("ISBN");
+		isbn.setFont(new Font("Tahoma", Font.BOLD, 14));
+		isbn.setForeground(Color.WHITE);
+		isbn.setBounds(47, 112, 46, 14);
+		frame.getContentPane().add(isbn);
+		
+		JLabel pubName = new JLabel("Publisher Name");
+		pubName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		pubName.setForeground(Color.WHITE);
+		pubName.setBounds(45, 143, 115, 14);
+		frame.getContentPane().add(pubName);
+		
+		JLabel pubDate = new JLabel("Publish Date");
+		pubDate.setForeground(Color.WHITE);
+		pubDate.setFont(new Font("Tahoma", Font.BOLD, 14));
+		pubDate.setBounds(45, 176, 104, 14);
+		frame.getContentPane().add(pubDate);
+		
+		bkName = new JTextField();
+		bkName.setBounds(164, 41, 200, 20);
+		frame.getContentPane().add(bkName);
+		bkName.setColumns(10);
+		
+		aName = new JTextField();
+		aName.setBounds(164, 78, 200, 20);
+		frame.getContentPane().add(aName);
+		aName.setColumns(10);
+		
+		isbnNum = new JTextField();
+		isbnNum.setBounds(164, 111, 200, 20);
+		frame.getContentPane().add(isbnNum);
+		isbnNum.setColumns(10);
+		
+		publisher = new JTextField();
+		publisher.setBounds(164, 142, 200, 20);
+		frame.getContentPane().add(publisher);
+		publisher.setColumns(10);
+		
+		date = new JTextField();
+		date.setBounds(164, 175, 200, 20);
+		frame.getContentPane().add(date);
+		date.setColumns(10);
+		
+		JButton add = new JButton("Add");
+		add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = bkName.getText();
+				String author = aName.getText();
+				String pDate = date.getText();
+				int num = Integer.parseInt((isbnNum.getText()));
+				String pubN= publisher.getText();
+				Book b = new Book(name, author,pDate,num,pubN);
+				docs.add(b);
+				JOptionPane.showMessageDialog(null, "Successfully Added");
+				
+			}
+		});
+		add.setBounds(275, 217, 89, 23);
+		frame.getContentPane().add(add);
+		
+		JButton back = new JButton("Return");
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Operator op = new Operator(docs);
+			}
+		});
+		back.setBounds(176, 217, 89, 23);
+		frame.getContentPane().add(back);
+		frame.setVisible(true);
+	}
+	}
+
+

@@ -1,0 +1,19 @@
+
+public class Magazine {
+	private int magID;
+	private String company;
+	
+	public int getMagID() {
+		return magID;
+	}
+	public void setMagID(int magID) {
+		this.magID = magID;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
+}

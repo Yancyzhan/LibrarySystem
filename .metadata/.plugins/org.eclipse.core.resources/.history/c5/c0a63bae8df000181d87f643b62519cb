@@ -1,0 +1,38 @@
+
+public class Buyer {
+	String name;
+	Order order;
+	Subject subject;
+	
+	public Document search(Document doc) {
+		return doc;
+	}
+	
+	public void placeorder(Order order) {
+		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+}

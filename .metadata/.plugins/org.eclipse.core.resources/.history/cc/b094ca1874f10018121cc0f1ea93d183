@@ -1,0 +1,85 @@
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class AddMagazine {
+
+	private JFrame frmAddMagazine;
+	private Vector<Document> docs;
+	private JTextField mName;
+	private JTextField aName;
+	private JTextField magId;
+	private JTextField company;
+	private JTextField date;
+	/**
+	 * Launch the application.
+	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AddMagazine window = new AddMagazine();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	/**
+	 * Create the application.
+	 */
+	public AddMagazine(Vector<Document> docs) {
+		this.docs = docs;
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmAddMagazine = new JFrame();
+		frmAddMagazine.setTitle("Add Magazine");
+		frmAddMagazine.setBounds(100, 100, 450, 300);
+		frmAddMagazine.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAddMagazine.getContentPane().setLayout(null);
+		frmAddMagazine.setVisible(true);
+		
+		JLabel bName = new JLabel("Magazine Name");
+		bName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		bName.setForeground(Color.WHITE);
+		bName.setBounds(45, 42, 94, 14);
+		frmAddMagazine.getContentPane().add(bName);
+		
+		JLabel autName = new JLabel("Author Name");
+		autName.setForeground(Color.WHITE);
+		autName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		autName.setBounds(45, 79, 115, 14);
+		frmAddMagazine.getContentPane().add(autName);
+		
+		JLabel isbn = new JLabel("ID");
+		isbn.setFont(new Font("Tahoma", Font.BOLD, 14));
+		isbn.setForeground(Color.WHITE);
+		isbn.setBounds(47, 112, 46, 14);
+		frmAddMagazine.getContentPane().add(isbn);
+		
+		JLabel pubName = new JLabel("Company Name");
+		pubName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		pubName.setForeground(Color.WHITE);
+		pubName.setBounds(45, 143, 115, 14);
+		frmAddMagazine.getContentPane().add(pubName);
+		
+		JLabel pubDate = new JLabel("Publish Date");
+		pubDate.setForeground(Color.WHITE);
+		pubDate.setFont(new Font("Tahoma", Font.BOLD, 14));
+		pubDate.setBounds(45, 176, 104, 14);
+		frmAddMagazine.getContentPane().add(pubDate);
+	}
+
+}
